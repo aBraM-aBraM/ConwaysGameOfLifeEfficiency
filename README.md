@@ -1,0 +1,2 @@
+# ConwaysGameOfLifeEfficiency
+A calculation thing
