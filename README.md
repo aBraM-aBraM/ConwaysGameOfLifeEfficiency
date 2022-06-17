@@ -1,11 +1,21 @@
-# Conway's Game Of Life - Copy the whole array?
-Conway's Game Of Life requires all calculations on each cell to happen simultaneously. In order to achieve such goals data needs to be copied.
+# Conway's Game Of Life Optimized
+
+Conway's Game of Life is a game in which a grid of cells with boolean values are updated according to predetermined rules.
+
+## Rules:
+* A cell can interact with it's 8 neighboring cells
+* If a living cell has less than 2 neighbors it dies of underpopulation
+* If a living cell has more than 3 neighbors it dies of overpopulation
+* If a dead cell has exactly 3 living neighbors it becomes alive
+* All other cells die (If the cell is already dead it keeps being dead)
+
+Conway's Game Of Life requires every calculations on each cell to happen simultaneously. In order to achieve this goal data needs to be copied.
 
  Should the entire grid be copied? Should only the changed positions be copied?
 In this markdown I'll cover this question.
 
 # Solution
-Firstly, a maximum grid size should be agreed upon. I will use a grid of `uint32` (4 bytes).
+Firstly, a maximum grid size should be agreed upon. I will use a grid with an edge size of `uint32` (4 bytes).
 
 The cost of copying an entire grid of size `n*n ` equals `n*n/sizeof(byte) => n*n/8`. This is because each cell contains a boolean which could be optimized into a single bit.
 
@@ -69,9 +79,9 @@ By randomizing an entire grid of `n*n` the average data that needs to be stored 
  `= 8 * (n * n) * 0.500.. = n * n * 4.00.. = ~ 4 * n^2`
 
 
-The point of peak is when `4 * change_count = n * n`
-or `change_count = n*n/4`
+The point of peak is when `4 * change_count = n * n / 8`
+or `change_count = n*n/32`
 
 ## Result
 
-If the number of changed cells is more than a quarter of the entire grid just copy the entire grid, otherwise store data on each changed cell
+If the number of changed cells is more than a `1/32` of the entire grid just copy the entire grid, otherwise store data on each changed cell
