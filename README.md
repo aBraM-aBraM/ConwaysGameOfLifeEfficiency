@@ -41,23 +41,30 @@ Zero neighbors combination count = `8!/(8-0)! = 1`
 One neighbor combination count = `8!/(8-1)! = 8`
 
 > Underpopulation center count = 9
+> 
 > Underpopulation edge count = `5!/(5-0)! + 5!/(5-1)! = 1 + 5 = 6`
+> 
 > Underpopulation corner count = `3!/(3-0)! + 3!/(3-1)! = 1 + 3 = 4`
 
 #### Overpopulation
 Overpopulation happens when a living cell has more than 3 neighbors or `{4,5,6,7,8}`.
 > Overpopulation center count = `Σ(i=4, n=8) {n!/(n-i)!} = 109200`
+> 
 > Overpopulation edge count = `Σ(i=4, n=6) {n!/(n-i)!} = 1800`
+> 
 > Overpopulation edge count = `0`
 
 Of course we need to take into account that the chance of the cell actually being alive is `50%` thus
 halving the amount of state changes
 #
 > Total state change by death = `(109209 + 1800 + 0) /2 = 55504`
+
 ## Being Born
 A new cell is born if the cell is dead and has 3 neighbors (of course with the chance of the cell being dead `50%`)
 > Born center count = `8!/(8-3)! / 2 = 336`
+> 
 > Born center count = `6!/(6-3)! / 2 = 60`
+> 
 > Born corner count = `1`
 
 > Total state changes by being born = `336 + 60 + 1 = 397`
@@ -69,8 +76,11 @@ A new cell is born if the cell is dead and has 3 neighbors (of course with the c
 The chance of a change is the total amount of change states divided by the total grid size.
 
 > Total center count = `Σ(i=0, n=8) {n!/(n-i)!} = 109601`
+> 
 > Total edge count = `Σ(i=0, n=6) {n!/(n-i)!} = 1957`
+> 
 > Total corner count = `Σ(i=0, n=4) {n!/(n-i)!} = 65`
+> 
 > `total_count = 109601 + 1957 + 65 = 111623`
 
 `change_chance = total_change_count/total_count = 0.5008018060793923 = ~ 50%`
